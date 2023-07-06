@@ -7,8 +7,14 @@ This function should take a string as an argument
 Somwhere in the middle of the string, there will be a series of consecutive digits composing a number
 You should extract that number from the string and return it
 */
+function extractCode(string) {
+  const regex = /[0-9]/g
+  return +(string.match(regex)).join("")
+}
 
-skipTest(
+// 
+
+runTest(
   "extractCode() can find the number in a single word string",
   function () {
     check(extractCode("abcd67yuio")).isEqualTo(67);
@@ -18,15 +24,18 @@ skipTest(
   }
 );
 
-/*
-isValidSortCode()
 
-This function should take a string representing a sort code as an argument
-A valid sort code should adhere to the format: 2 digits hyphen 2 digits hyphen 2 digits
-You should return true if the sort code is valid, and false otherwise
-*/
+function isValidSortCode(str) {
+  const regex = /^\d{2}-\d{2}-\d{2}$/
+  return regex.test(str);
+}
 
-skipTest(
+//This function should take a string representing a sort code as an argument
+//A valid sort code should adhere to the format: 2 digits hyphen 2 digits hyphen 2 digits
+//You should return true if the sort code is valid, and false otherwise
+//*/
+
+runTest(
   "isValidSortCode() should check is a sort code string is in the correct format",
   function () {
     check(isValidSortCode("10-34-67")).isEqualTo(true);
@@ -48,8 +57,12 @@ This function should take a string representing an email as an argument
 An email is considered to be professional if it does not end with a kiss ("x" or "X")
 You should return true if the email is professional, and false otherwise
 */
+function isProfessionalEmail(str) {
+  const regex = /[x|X]$/
+  return !regex.test(str)
+}
 
-skipTest(
+runTest(
   "isProfessionalEmail() checks if an email ends with an x",
   function () {
     check(isProfessionalEmail("x")).isEqualTo(false);
@@ -65,6 +78,13 @@ countVowels()
 
 This function should take a string as an argument, and return a count representing the number of vowels it contains
 */
+function countVowels(str) {
+  
+  const regex = /[aeiouAEIOU]/g
+  let arr = str.match(regex)
+  return arr.length
+
+}
 
 skipTest("countVowels() counts the vowels in a string", function () {
   check(countVowels("")).isEqualTo(0);
@@ -83,7 +103,22 @@ Consecutive digits should be taken as numbers: i.e. "24" = 24, not 6
 If there are no numbers, you should return 0
 */
 
-skipTest("sumNums() totals all of the numbers in a string", function () {
+function sumNums(str) {
+  let regex = (/\d+(?!d)/g)
+if(!regex.test(str)) {
+  return 0
+} else {
+
+  const stringArr = str.match(/\d+(?!d)/g) 
+  const numArray = stringArr.map(num => +num)
+
+  const finalResult = numArray.reduce((accumulator, currentValue) => (accumulator + currentValue), 0)
+  return finalResult
+}
+}
+  
+
+runTest("sumNums() totals all of the numbers in a string", function () {
   check(sumNums("hello")).isEqualTo(0);
   check(sumNums("1")).isEqualTo(1);
   check(sumNums("12")).isEqualTo(12);
@@ -272,4 +307,4 @@ skipTest("matchUniqueDigits() ", function () {
   check(matchUniqueDigits("00")).isEqualTo(false);
 });
 
-///////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////

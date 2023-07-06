@@ -2,7 +2,7 @@ const { check, runTest, skipTest } = require("./test-api/index.js");
 
 function testCat(str) {
   // Your pattern should match a string containing the characters cat
-  return YOUR_REGEX_HERE.test(str);
+  return /cat/.test(str);
 }
 
 runTest("testCat()", function () {
@@ -20,10 +20,10 @@ runTest("testCat()", function () {
 
 function testAtLeast5Digits(str) {
   // Your pattern should match a string containing at least 5 of the digits from 1 to 9 only
-  return YOUR_REGEX_HERE.test(str);
+  return /[1-9]{5,}/g.test(str);
 }
 
-skipTest("testAtLeast5Digits()", function () {
+runTest("testAtLeast5Digits()", function () {
   check(testAtLeast5Digits("12345")).isEqualTo(true);
   check(testAtLeast5Digits("56783")).isEqualTo(true);
   check(testAtLeast5Digits("98764")).isEqualTo(true);
