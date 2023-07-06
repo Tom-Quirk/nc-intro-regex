@@ -112,8 +112,7 @@ if(!regex.test(str)) {
   const stringArr = str.match(/\d+(?!d)/g) 
   const numArray = stringArr.map(num => +num)
 
-  const finalResult = numArray.reduce((accumulator, currentValue) => (accumulator + currentValue), 0)
-  return finalResult
+  return numArray.reduce((accumulator, currentValue) => (accumulator + currentValue), 0)
 }
 }
   
